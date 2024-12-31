@@ -74,6 +74,19 @@ public class ApplyPricingSpecification
         await mockPricingStore.Received().SaveAsync(Arg.Is<PricingTable>(
             table => table.Tiers.Count == expectedPricingData.Tiers.Count), default);
     }
+    
+    [Fact]
+    public async Task Should_save_expected_data_nsubstitute1()
+    {
+        var expectedPricingData = new PricingTable(new[] { new PriceTier(_maxHourLimit, _expectedPrice) });
+        var mockPricingStore = Substitute.For<IPricingStore>();
+        var pricingManager = new PricingManager(mockPricingStore);
+
+        _ = await pricingManager.HandleAsync(CreateRequest(), default);
+
+        await mockPricingStore.Received().SaveAsync(Arg.Is<PricingTable>(
+            table => table.Tiers.Count == expectedPricingData.Tiers.Count), default);
+    }
 
     [Fact]
     public async Task Should_save_equivalent_data_to_storage()
