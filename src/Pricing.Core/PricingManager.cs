@@ -4,7 +4,7 @@ using Pricing.Core.Extensions;
 
 namespace Pricing.Core;
 
-public class PricingManager
+public class PricingManager : IPricingManager
 {
     private readonly IPricingStore _pricingStore;
     public PricingManager(IPricingStore pricingStore)
