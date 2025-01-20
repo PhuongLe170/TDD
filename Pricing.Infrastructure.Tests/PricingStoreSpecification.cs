@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Newtonsoft.Json;
 using Pricing.Core;
+using Pricing.Core.ApplyPricing;
 using Pricing.Core.Domain;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 

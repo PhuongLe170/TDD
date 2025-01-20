@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Pricing.Infrastructure\Pricing.Infrastructure.csproj" />
       <ProjectReference Include="..\src\Pricing.Core\Pricing.Core.csproj" />
     </ItemGroup>
 

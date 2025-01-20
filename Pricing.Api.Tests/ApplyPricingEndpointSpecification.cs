@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pricing.Api.Tests.TestDoubles;
 using Pricing.Core;
+using Pricing.Core.ApplyPricing;
 using Pricing.Core.Tests.TestDoubles;
 
 namespace Pricing.Api.Tests;

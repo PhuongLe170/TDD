@@ -1,4 +1,5 @@
 ﻿using Pricing.Core;
+using Pricing.Core.ApplyPricing;
 using Pricing.Core.Domain.Exceptions;
 
 namespace Pricing.Api.Tests.TestDoubles;

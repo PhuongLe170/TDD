@@ -14,7 +14,7 @@
         <PackageReference Include="FluentAssertions" Version="7.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
-        <PackageReference Include="NSubstitute" Version="5.3.0" />
+        <PackageReference Include="Testcontainers.PostgreSql" Version="4.1.0" />
         <PackageReference Include="xunit" Version="2.5.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
     </ItemGroup>
@@ -26,8 +26,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Pricing.Api\Pricing.Api.csproj" />
       <ProjectReference Include="..\Pricing.Infrastructure\Pricing.Infrastructure.csproj" />
-      <ProjectReference Include="..\src\Pricing.Core\Pricing.Core.csproj" />
-      <ProjectReference Include="..\tests\Pricing.Core.Tests\Pricing.Core.Tests.csproj" />
     </ItemGroup>
 
 </Project>

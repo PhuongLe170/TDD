@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pricing.Core;
+using Pricing.Core.ApplyPricing;
+using Pricing.Core.TicketPrice;
 using Pricing.Infrastructure;
 
 namespace Pricing.Api.Tests;
@@ -16,7 +18,7 @@ public class ApiFactory : WebApplicationFactory<IApiAssemblyMarker>
     {
         _configure = configure;
     }
-    
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Development");
@@ -26,6 +28,8 @@ public class ApiFactory : WebApplicationFactory<IApiAssemblyMarker>
             services.RemoveAll(typeof(IDbConnectionFactory));
             services.RemoveAll(typeof(IPricingStore));
             services.RemoveAll(typeof(DatabaseInitializer));
+            services.RemoveAll(typeof(IReadPricingStore));
+            services.AddScoped<IReadPricingStore>(_ => null!);
 
             _configure(services);
         });
