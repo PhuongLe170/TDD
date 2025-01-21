@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Reflection.Metadata;
+using FluentAssertions;
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
 using Pricing.Core.Domain;
@@ -24,9 +25,7 @@ public class TicketPriceServiceSpecification
     [Fact]
     public async Task Should_get_pricing_table_from_store()
     {
-        var service = new TicketPriceService(_pricingStore, Substitute.For<IPriceCalculator>());
-
-        await service.HandleAsync(new TicketPriceRequest(DateTimeOffset.MinValue, DateTimeOffset.MaxValue), default);
+        await _service.HandleAsync(CreateRequest(), default);
         await _pricingStore.Received(1)
             .GetAsync(default!);
     }
@@ -59,6 +58,16 @@ public class TicketPriceServiceSpecification
         var response =  await _service.HandleAsync(ticketPriceRequest, default);
 
         response.Price.Should().Be(2);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-5)]
+    public async Task Should_throw_argument_exception_when_entry_time_eq_or_gt_exit(int duration)
+    {
+        var handle = () => _service.HandleAsync(CreateRequest(0), default);
+        
+        await handle.Should().ThrowAsync<ArgumentException>();
     }
 
     private static TicketPriceRequest CreateRequest(int durationInMinutes = 5)

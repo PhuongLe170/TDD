@@ -16,12 +16,27 @@ public class PricingTierSpecification
 
         create.Should().ThrowExactly<InvalidPricingTierException>();
     }
-    
+
     [Fact]
     public void Should_throw_invalid_pricing_tier_exception_when_price_is_negative()
     {
         var create = () => new PriceTier(1, -1);
 
         create.Should().Throw<InvalidPricingTierException>();
+    }
+    
+
+    [Theory]
+    [InlineData(5, 2, 10)]
+    [InlineData(10, 2, 20)]
+    [InlineData(5, 4, 20)]
+    public void Should_calculate_the_full_price_tier(int hourLimit, decimal price, decimal expected)
+    {
+        // Arrange
+        var tier = new PriceTier(hourLimit, price);
+        // Act
+        var fullPrice = tier.CalculateFullPrice();
+        // Assert
+        fullPrice.Should().Be(expected);
     }
 }

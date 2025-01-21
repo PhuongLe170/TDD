@@ -2,5 +2,5 @@
 
 public interface ITicketPriceService
 {
-    Task<TicketPriceResponse> HandleAsync(TicketPriceRequest ticketPriceRequest, CancellationToken cancellationToken);
+    Task<TicketPriceResponse> HandleAsync(TicketPriceRequest request, CancellationToken cancellationToken);
 }

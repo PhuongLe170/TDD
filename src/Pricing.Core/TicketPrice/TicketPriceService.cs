@@ -11,12 +11,17 @@ public class TicketPriceService : ITicketPriceService
         _priceCalculator = priceCalculator;
     }
 
-    public async Task<TicketPriceResponse> HandleAsync(TicketPriceRequest ticketPriceRequest,
+    public async Task<TicketPriceResponse> HandleAsync(TicketPriceRequest request,
         CancellationToken cancellationToken)
     {
+        if (request.Entry >= request.Exit)
+        {
+            throw new ArgumentException();
+        }
+
         var pricingTable = await _pricingStore.GetAsync(cancellationToken);
-        var price = _priceCalculator.Calculate(pricingTable, ticketPriceRequest);
-       
+        var price = _priceCalculator.Calculate(pricingTable, request);
+
         return await Task.FromResult(new TicketPriceResponse(Price: price));
     }
 }

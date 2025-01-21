@@ -17,4 +17,9 @@ public class PriceTier
 
     public decimal Price { get; }
     public int HourLimit { get; }
+
+    public decimal CalculateFullPrice()
+    {
+        return Price * HourLimit;
+    }
 }
